@@ -1,4 +1,3 @@
-// GameSDL.cpp
 #include "GameSDL.h"
 #include <SDL_ttf.h>
 
@@ -49,6 +48,7 @@ void GameSDL::render(Game& game) {
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderClear(renderer);
 
+    // Vẽ các ô và số
     for (int i = 0; i < GRID_SIZE; i++) {
         for (int j = 0; j < GRID_SIZE; j++) {
             SDL_Rect tile = { j * TILE_SIZE, i * TILE_SIZE, TILE_SIZE, TILE_SIZE };
@@ -67,6 +67,15 @@ void GameSDL::render(Game& game) {
                 SDL_DestroyTexture(textTexture);
             }
         }
+    }
+
+    // Vẽ các đường kẻ ô
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255); // Màu đen cho đường kẻ
+    for (int i = 1; i < GRID_SIZE; ++i) {
+        // Vẽ đường ngang
+        SDL_RenderDrawLine(renderer, 0, i * TILE_SIZE, screenWidth, i * TILE_SIZE);
+        // Vẽ đường dọc
+        SDL_RenderDrawLine(renderer, i * TILE_SIZE, 0, i * TILE_SIZE, screenHeight);
     }
 
     SDL_RenderPresent(renderer);

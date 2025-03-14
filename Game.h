@@ -30,4 +30,4 @@ public:
     bool hasMoved() const { return moved; }
 };
 
-#endif // GAME_H
+#endif // G
