@@ -52,6 +52,8 @@ void GameSDL::render(Game& game) {
     for (int i = 0; i < GRID_SIZE; i++) {
         for (int j = 0; j < GRID_SIZE; j++) {
             SDL_Rect tile = { j * TILE_SIZE, i * TILE_SIZE, TILE_SIZE, TILE_SIZE };
+
+            // Chọn màu ô dựa vào giá trị
             SDL_SetRenderDrawColor(renderer, 200, 200, 200, 255);
             SDL_RenderFillRect(renderer, &tile);
 
@@ -61,7 +63,17 @@ void GameSDL::render(Game& game) {
                 string text = to_string(value);
                 SDL_Surface* textSurface = TTF_RenderText_Solid(font, text.c_str(), textColor);
                 SDL_Texture* textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
-                SDL_Rect textRect = { tile.x + TILE_SIZE / 4, tile.y + TILE_SIZE / 4, textSurface->w, textSurface->h };
+
+                // Căn giữa số trong ô
+                int textWidth = textSurface->w;
+                int textHeight = textSurface->h;
+                SDL_Rect textRect = {
+                    tile.x + (TILE_SIZE - textWidth) / 2,
+                    tile.y + (TILE_SIZE - textHeight) / 2,
+                    textWidth,
+                    textHeight
+                };
+
                 SDL_RenderCopy(renderer, textTexture, NULL, &textRect);
                 SDL_FreeSurface(textSurface);
                 SDL_DestroyTexture(textTexture);
@@ -69,13 +81,11 @@ void GameSDL::render(Game& game) {
         }
     }
 
-    // Vẽ các đường kẻ ô
+    // Vẽ lưới ô vuông
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255); // Màu đen cho đường kẻ
     for (int i = 1; i < GRID_SIZE; ++i) {
-        // Vẽ đường ngang
-        SDL_RenderDrawLine(renderer, 0, i * TILE_SIZE, screenWidth, i * TILE_SIZE);
-        // Vẽ đường dọc
-        SDL_RenderDrawLine(renderer, i * TILE_SIZE, 0, i * TILE_SIZE, screenHeight);
+        SDL_RenderDrawLine(renderer, 0, i * TILE_SIZE, screenWidth, i * TILE_SIZE); // Đường ngang
+        SDL_RenderDrawLine(renderer, i * TILE_SIZE, 0, i * TILE_SIZE, screenHeight); // Đường dọc
     }
 
     SDL_RenderPresent(renderer);

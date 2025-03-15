@@ -28,6 +28,8 @@ public:
     void printBoard();
     bool isGameOver();
     bool hasMoved() const { return moved; }
+    bool hasWon();
+
 };
 
 #endif // G

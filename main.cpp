@@ -12,11 +12,19 @@ int main(int argc, char* argv[]) {
 
     bool running = true;
     while (running) {
-        gameSDL.handleEvents(game, running);
-        gameSDL.render(game);
-        SDL_Delay(100);  // Prevent CPU from running too fast
+    gameSDL.handleEvents(game, running);
+    gameSDL.render(game);
+
+    if (game.hasWon()) {
+        cout << "Congratulations! You won by reaching 2048!\n";
+        running = false;
+    }
+    if (game.isGameOver()) {
+        running = false;
     }
 
+    SDL_Delay(100);
+}
     gameSDL.cleanUp();
     return 0;
 }

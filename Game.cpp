@@ -10,6 +10,12 @@ Game::Game() {
     addRandomTile();
     moved = false;
 }
+bool Game::hasWon() {
+    for (int i = 0; i < SIZE; ++i)
+        for (int j = 0; j < SIZE; ++j)
+            if (board[i][j] == 2048) return true;
+    return false;
+}
 
 void Game::addRandomTile() {
     vector<pair<int, int>> emptyCells;
@@ -91,8 +97,13 @@ void Game::spawnNewTile() {
 }
 
 bool Game::isGameOver() {
-    return !canMove();
+    if (!canMove()) {
+        cout << "Game Over! No more possible moves.\n";
+        return true;
+    }
+    return false;
 }
+
 
 bool Game::canMove() {
     for (int i = 0; i < SIZE; ++i)
