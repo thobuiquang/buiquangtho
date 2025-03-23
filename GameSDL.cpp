@@ -5,7 +5,7 @@ GameSDL::GameSDL() {
     window = nullptr;
     renderer = nullptr;
     screenWidth = GRID_SIZE * TILE_SIZE;
-    screenHeight = GRID_SIZE * TILE_SIZE;
+    screenHeight = GRID_SIZE * TILE_SIZE + SCORE_AREA_HEIGHT;
 }
 
 GameSDL::~GameSDL() {
@@ -48,10 +48,38 @@ void GameSDL::render(Game& game) {
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderClear(renderer);
 
-    // Vẽ các ô và số
+    // Vẽ vùng hiển thị điểm
+    SDL_Rect scoreArea = {0, 0, screenWidth, SCORE_AREA_HEIGHT};
+    SDL_SetRenderDrawColor(renderer, 220, 220, 220, 255);
+    SDL_RenderFillRect(renderer, &scoreArea);
+
+    // Hiển thị Score và Best Score
+    SDL_Color textColor = {0, 0, 0, 255};
+
+    string scoreText = "Score: " + to_string(game.getScore());
+    string bestScoreText = "Best: " + to_string(game.getBestScore());
+
+    SDL_Surface* scoreSurface = TTF_RenderText_Solid(font, scoreText.c_str(), textColor);
+    SDL_Surface* bestScoreSurface = TTF_RenderText_Solid(font, bestScoreText.c_str(), textColor);
+
+    SDL_Texture* scoreTexture = SDL_CreateTextureFromSurface(renderer, scoreSurface);
+    SDL_Texture* bestScoreTexture = SDL_CreateTextureFromSurface(renderer, bestScoreSurface);
+
+    SDL_Rect scoreRect = {10, 10, scoreSurface->w, scoreSurface->h};
+    SDL_Rect bestScoreRect = {screenWidth - bestScoreSurface->w - 10, 10, bestScoreSurface->w, bestScoreSurface->h};
+
+    SDL_RenderCopy(renderer, scoreTexture, NULL, &scoreRect);
+    SDL_RenderCopy(renderer, bestScoreTexture, NULL, &bestScoreRect);
+
+    SDL_FreeSurface(scoreSurface);
+    SDL_FreeSurface(bestScoreSurface);
+    SDL_DestroyTexture(scoreTexture);
+    SDL_DestroyTexture(bestScoreTexture);
+
+    // Vẽ các ô trong game (dời xuống dưới)
     for (int i = 0; i < GRID_SIZE; i++) {
         for (int j = 0; j < GRID_SIZE; j++) {
-            SDL_Rect tile = { j * TILE_SIZE, i * TILE_SIZE, TILE_SIZE, TILE_SIZE };
+            SDL_Rect tile = { j * TILE_SIZE, i * TILE_SIZE + SCORE_AREA_HEIGHT, TILE_SIZE, TILE_SIZE };
 
             // Chọn màu ô dựa vào giá trị
             SDL_SetRenderDrawColor(renderer, 200, 200, 200, 255);
@@ -83,9 +111,9 @@ void GameSDL::render(Game& game) {
 
     // Vẽ lưới ô vuông
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255); // Màu đen cho đường kẻ
-    for (int i = 1; i < GRID_SIZE; ++i) {
-        SDL_RenderDrawLine(renderer, 0, i * TILE_SIZE, screenWidth, i * TILE_SIZE); // Đường ngang
-        SDL_RenderDrawLine(renderer, i * TILE_SIZE, 0, i * TILE_SIZE, screenHeight); // Đường dọc
+    for (int i = 0; i <= GRID_SIZE; ++i) {
+        SDL_RenderDrawLine(renderer, 0, i * TILE_SIZE + SCORE_AREA_HEIGHT, screenWidth, i * TILE_SIZE + SCORE_AREA_HEIGHT); // Đường ngang
+        SDL_RenderDrawLine(renderer, i * TILE_SIZE, SCORE_AREA_HEIGHT, i * TILE_SIZE, screenHeight); // Đường dọc
     }
 
     SDL_RenderPresent(renderer);

@@ -3,17 +3,17 @@
 	"Game.h"
 	"GameSDL.h"
 
-1742057965 source:d:\sdl2\2048game\game.cpp
+1742721857 source:d:\sdl2\2048game\game.cpp
 	"Game.h"
 
-1742057965 d:\sdl2\2048game\game.h
+1742721857 d:\sdl2\2048game\game.h
 	<iostream>
 	<vector>
 	<cstdlib>
 	<ctime>
 	<iomanip>
 
-1742057781 d:\sdl2\2048game\gamesdl.h
+1742722245 d:\sdl2\2048game\gamesdl.h
 	<SDL_ttf.h>
 	<SDL.h>
 	<iostream>

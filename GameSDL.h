@@ -9,7 +9,7 @@ class Game;  // Khai báo trước (forward declaration)
 
 
 using namespace std;
-
+const int SCORE_AREA_HEIGHT = 50;
 const int TILE_SIZE = 100;  // Tile size
 const int GRID_SIZE = 4;    // 4x4 grid
 

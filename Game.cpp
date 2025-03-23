@@ -1,6 +1,6 @@
 #include "Game.h"
 
-Game::Game() {
+Game::Game() : score(0), bestScore(0) {
     srand(time(0));
     for (int i = 0; i < SIZE; ++i)
         for (int j = 0; j < SIZE; ++j)
@@ -10,6 +10,7 @@ Game::Game() {
     addRandomTile();
     moved = false;
 }
+
 bool Game::hasWon() {
     for (int i = 0; i < SIZE; ++i)
         for (int j = 0; j < SIZE; ++j)
@@ -51,6 +52,8 @@ bool Game::moveLeft() {
             if (board[i][j] != 0) {
                 if (index > 0 && compressed[index - 1] == board[i][j]) {
                     compressed[index - 1] *= 2;
+                    score += compressed[index - 1];
+                    if (score > bestScore) bestScore = score;
                     moved = true;
                 } else {
                     compressed[index++] = board[i][j];

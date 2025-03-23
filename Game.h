@@ -11,6 +11,9 @@ using namespace std;
 
 class Game {
 private:
+    private:
+    int score;
+    int bestScore;
     static const int SIZE = 4;
     int board[SIZE][SIZE];
     bool moved;
@@ -22,6 +25,8 @@ private:
 
 public:
     Game();
+    int getScore() const { return score; }
+    int getBestScore() const { return bestScore; }
     int getValue(int row, int col) const { return board[row][col]; }
     bool move(char direction);  // Trả về true nếu có sự di chuyển
     void spawnNewTile();  // Thêm ô mới sau mỗi lần di chuyển
