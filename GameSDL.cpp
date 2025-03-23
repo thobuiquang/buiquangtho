@@ -131,7 +131,12 @@ void GameSDL::handleEvents(Game& game, bool& running) {
                 case SDLK_DOWN: moved = game.move('s'); break;
                 case SDLK_LEFT: moved = game.move('a'); break;
                 case SDLK_RIGHT: moved = game.move('d'); break;
-                case SDLK_q: running = false; break;
+                case SDLK_q:
+                cout << "Exiting game...\n";
+                cout << "Your Score: " << game.getScore() << endl;
+                cout << "Best Score: " << game.getBestScore() << endl;
+                running = false;
+                break;
             }
             if (moved) {
                 game.spawnNewTile();
