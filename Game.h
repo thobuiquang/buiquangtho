@@ -34,7 +34,8 @@ public:
     bool isGameOver();
     bool hasMoved() const { return moved; }
     bool hasWon();
-
+    void resetGame();
 };
+
 
 #endif // G

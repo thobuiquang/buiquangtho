@@ -1,25 +1,25 @@
 # depslib dependency file v1.0
-1742057990 source:d:\sdl2\2048game\main.cpp
+1742723494 source:d:\sdl2\2048game\main.cpp
 	"Game.h"
 	"GameSDL.h"
 
-1742721857 source:d:\sdl2\2048game\game.cpp
+1742724317 source:d:\sdl2\2048game\game.cpp
 	"Game.h"
 
-1742721857 d:\sdl2\2048game\game.h
+1742724317 d:\sdl2\2048game\game.h
 	<iostream>
 	<vector>
 	<cstdlib>
 	<ctime>
 	<iomanip>
 
-1742722245 d:\sdl2\2048game\gamesdl.h
+1742723941 d:\sdl2\2048game\gamesdl.h
 	<SDL_ttf.h>
 	<SDL.h>
 	<iostream>
 	"Game.h"
 
-1742058086 source:d:\sdl2\2048game\gamesdl.cpp
+1742723941 source:d:\sdl2\2048game\gamesdl.cpp
 	"GameSDL.h"
 	<SDL_ttf.h>
 

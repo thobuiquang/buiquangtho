@@ -102,12 +102,11 @@ void Game::spawnNewTile() {
 bool Game::isGameOver() {
     if (!canMove()) {
         cout << "Game Over! No more possible moves.\n";
+        cout << "Best Score: " << bestScore << endl;
         return true;
     }
     return false;
 }
-
-
 bool Game::canMove() {
     for (int i = 0; i < SIZE; ++i)
         for (int j = 0; j < SIZE; ++j)
@@ -123,3 +122,14 @@ bool Game::canMove() {
 
     return false;
 }
+void Game::resetGame() {
+    score = 0;
+    for (int i = 0; i < SIZE; ++i)
+        for (int j = 0; j < SIZE; ++j)
+            board[i][j] = 0;
+
+    addRandomTile();
+    addRandomTile();
+    moved = false;
+}
+
