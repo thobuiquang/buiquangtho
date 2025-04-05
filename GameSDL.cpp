@@ -48,12 +48,10 @@ void GameSDL::render(Game& game) {
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderClear(renderer);
 
-    // Vẽ vùng hiển thị điểm
     SDL_Rect scoreArea = {0, 0, screenWidth, SCORE_AREA_HEIGHT};
     SDL_SetRenderDrawColor(renderer, 220, 220, 220, 255);
     SDL_RenderFillRect(renderer, &scoreArea);
 
-    // Hiển thị Score và Best Score
     SDL_Color textColor = {0, 0, 0, 255};
 
     string scoreText = "Score: " + to_string(game.getScore());
@@ -76,12 +74,10 @@ void GameSDL::render(Game& game) {
     SDL_DestroyTexture(scoreTexture);
     SDL_DestroyTexture(bestScoreTexture);
 
-    // Vẽ các ô trong game (dời xuống dưới)
     for (int i = 0; i < GRID_SIZE; i++) {
         for (int j = 0; j < GRID_SIZE; j++) {
             SDL_Rect tile = { j * TILE_SIZE, i * TILE_SIZE + SCORE_AREA_HEIGHT, TILE_SIZE, TILE_SIZE };
 
-            // Chọn màu ô dựa vào giá trị
             SDL_SetRenderDrawColor(renderer, 200, 200, 200, 255);
             SDL_RenderFillRect(renderer, &tile);
 
@@ -92,7 +88,6 @@ void GameSDL::render(Game& game) {
                 SDL_Surface* textSurface = TTF_RenderText_Solid(font, text.c_str(), textColor);
                 SDL_Texture* textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
 
-                // Căn giữa số trong ô
                 int textWidth = textSurface->w;
                 int textHeight = textSurface->h;
                 SDL_Rect textRect = {
@@ -109,11 +104,10 @@ void GameSDL::render(Game& game) {
         }
     }
 
-    // Vẽ lưới ô vuông
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255); // Màu đen cho đường kẻ
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     for (int i = 0; i <= GRID_SIZE; ++i) {
-        SDL_RenderDrawLine(renderer, 0, i * TILE_SIZE + SCORE_AREA_HEIGHT, screenWidth, i * TILE_SIZE + SCORE_AREA_HEIGHT); // Đường ngang
-        SDL_RenderDrawLine(renderer, i * TILE_SIZE, SCORE_AREA_HEIGHT, i * TILE_SIZE, screenHeight); // Đường dọc
+        SDL_RenderDrawLine(renderer, 0, i * TILE_SIZE + SCORE_AREA_HEIGHT, screenWidth, i * TILE_SIZE + SCORE_AREA_HEIGHT);
+        SDL_RenderDrawLine(renderer, i * TILE_SIZE, SCORE_AREA_HEIGHT, i * TILE_SIZE, screenHeight);
     }
 
     SDL_RenderPresent(renderer);

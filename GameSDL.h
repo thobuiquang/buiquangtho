@@ -1,5 +1,4 @@
-// GameSDL.h
-class Game;  // Khai báo trước (forward declaration)
+class Game;
 #ifndef GAME_SDL_H
 #define GAME_SDL_H
 #include <SDL_ttf.h>
@@ -10,8 +9,8 @@ class Game;  // Khai báo trước (forward declaration)
 
 using namespace std;
 const int SCORE_AREA_HEIGHT = 50;
-const int TILE_SIZE = 100;  // Tile size
-const int GRID_SIZE = 4;    // 4x4 grid
+const int TILE_SIZE = 100;
+const int GRID_SIZE = 4;
 
 class GameSDL {
 private:

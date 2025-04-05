@@ -1,4 +1,3 @@
-// main.cpp
 #include "Game.h"
 #include "GameSDL.h"
 
@@ -25,7 +24,7 @@ int main(int argc, char* argv[]) {
             bool waitForInput = true;
             while (waitForInput) {
             SDL_Event e;
-            SDL_WaitEvent(&e); // Chờ sự kiện thay vì vòng lặp liên tục
+            SDL_WaitEvent(&e);
             if (e.type == SDL_QUIT || (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_q)) {
             running = false;
             waitForInput = false;

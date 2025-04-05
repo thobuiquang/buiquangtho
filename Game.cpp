@@ -132,4 +132,3 @@ void Game::resetGame() {
     addRandomTile();
     moved = false;
 }
-
