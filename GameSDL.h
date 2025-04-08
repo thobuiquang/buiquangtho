@@ -1,13 +1,14 @@
-class Game;
 #ifndef GAME_SDL_H
 #define GAME_SDL_H
-#include <SDL_ttf.h>
+
 #include <SDL.h>
+#include <SDL_ttf.h>
+#include <SDL_mixer.h>
 #include <iostream>
 #include "Game.h"
 
-
 using namespace std;
+
 const int SCORE_AREA_HEIGHT = 50;
 const int TILE_SIZE = 100;
 const int GRID_SIZE = 4;
@@ -19,6 +20,9 @@ private:
     SDL_Renderer* renderer;
     int screenWidth;
     int screenHeight;
+
+    Mix_Chunk* moveSound;
+
 public:
     GameSDL();
     ~GameSDL();
@@ -27,4 +31,5 @@ public:
     void handleEvents(Game& game, bool& running);
     void cleanUp();
 };
+
 #endif

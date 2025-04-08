@@ -1,9 +1,12 @@
 #include "GameSDL.h"
 #include <SDL_ttf.h>
+#include <SDL_mixer.h>
 
 GameSDL::GameSDL() {
     window = nullptr;
     renderer = nullptr;
+    font = nullptr;
+    moveSound = nullptr;
     screenWidth = GRID_SIZE * TILE_SIZE;
     screenHeight = GRID_SIZE * TILE_SIZE + SCORE_AREA_HEIGHT;
 }
@@ -13,7 +16,7 @@ GameSDL::~GameSDL() {
 }
 
 bool GameSDL::init() {
-    if (SDL_Init(SDL_INIT_VIDEO) < 0) {
+    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0) {
         cout << "SDL could not initialize! SDL Error: " << SDL_GetError() << endl;
         return false;
     }
@@ -23,9 +26,20 @@ bool GameSDL::init() {
         return false;
     }
 
-    font = TTF_OpenFont("D:/SDL2/2048GAME/bin/Debug/Arial.ttf", 24);
+    if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
+        cout << "SDL_mixer could not initialize! Mix Error: " << Mix_GetError() << endl;
+        return false;
+    }
+
+    font = TTF_OpenFont("Arial.ttf", 24);
     if (!font) {
         cout << "Failed to load font! TTF Error: " << TTF_GetError() << endl;
+        return false;
+    }
+
+    moveSound = Mix_LoadWAV("move.wav");
+    if (!moveSound) {
+        cout << "Failed to load move sound! Mix Error: " << Mix_GetError() << endl;
         return false;
     }
 
@@ -117,8 +131,11 @@ void GameSDL::handleEvents(Game& game, bool& running) {
     SDL_Event e;
     while (SDL_PollEvent(&e)) {
         if (e.type == SDL_QUIT) {
+            cout << "Exiting game...\n";
+            cout << "Your Score: " << game.getScore() << endl;
+            cout << "Best Score: " << game.getBestScore() << endl;
             running = false;
-        } else if (e.type == SDL_KEYDOWN && e.key.repeat == 0) {
+        } else if (e.type == SDL_KEYDOWN) {
             bool moved = false;
             switch (e.key.keysym.sym) {
                 case SDLK_UP: moved = game.move('w'); break;
@@ -130,12 +147,10 @@ void GameSDL::handleEvents(Game& game, bool& running) {
                     cout << "Your Score: " << game.getScore() << endl;
                     cout << "Best Score: " << game.getBestScore() << endl;
                     running = false;
-                    SDL_Event quitEvent;
-                    quitEvent.type = SDL_QUIT;
-                    SDL_PushEvent(&quitEvent);
                     break;
             }
             if (moved) {
+                Mix_PlayChannel(-1, moveSound, 0);
                 game.spawnNewTile();
                 render(game);
             }
@@ -144,6 +159,12 @@ void GameSDL::handleEvents(Game& game, bool& running) {
 }
 
 void GameSDL::cleanUp() {
+    if (moveSound) {
+        Mix_FreeChunk(moveSound);
+        moveSound = nullptr;
+    }
+    Mix_Quit();
+
     if (font) {
         TTF_CloseFont(font);
         font = nullptr;

@@ -13,15 +13,17 @@
 	<ctime>
 	<iomanip>
 
-1744129428 d:\sdl2\2048game\gamesdl.h
-	<SDL_ttf.h>
+1744132049 d:\sdl2\2048game\gamesdl.h
 	<SDL.h>
+	<SDL_ttf.h>
+	<SDL_mixer.h>
 	<iostream>
 	"Game.h"
 
-1744130129 source:d:\sdl2\2048game\gamesdl.cpp
+1744132569 source:d:\sdl2\2048game\gamesdl.cpp
 	"GameSDL.h"
 	<SDL_ttf.h>
+	<SDL_mixer.h>
 
 1744106838 d:\sdl2\2048game\animation.h
 
