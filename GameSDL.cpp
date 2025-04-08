@@ -118,19 +118,22 @@ void GameSDL::handleEvents(Game& game, bool& running) {
     while (SDL_PollEvent(&e)) {
         if (e.type == SDL_QUIT) {
             running = false;
-        } else if (e.type == SDL_KEYDOWN) {
+        } else if (e.type == SDL_KEYDOWN && e.key.repeat == 0) {
             bool moved = false;
             switch (e.key.keysym.sym) {
                 case SDLK_UP: moved = game.move('w'); break;
                 case SDLK_DOWN: moved = game.move('s'); break;
                 case SDLK_LEFT: moved = game.move('a'); break;
                 case SDLK_RIGHT: moved = game.move('d'); break;
-                case SDLK_q:
-                cout << "Exiting game...\n";
-                cout << "Your Score: " << game.getScore() << endl;
-                cout << "Best Score: " << game.getBestScore() << endl;
-                running = false;
-                break;
+                case SDLK_ESCAPE:
+                    cout << "Exiting game...\n";
+                    cout << "Your Score: " << game.getScore() << endl;
+                    cout << "Best Score: " << game.getBestScore() << endl;
+                    running = false;
+                    SDL_Event quitEvent;
+                    quitEvent.type = SDL_QUIT;
+                    SDL_PushEvent(&quitEvent);
+                    break;
             }
             if (moved) {
                 game.spawnNewTile();
