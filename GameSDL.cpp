@@ -21,6 +21,8 @@ bool GameSDL::init() {
         return false;
     }
 
+    SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0");
+
     if (TTF_Init() == -1) {
         cout << "SDL_ttf could not initialize! TTF Error: " << TTF_GetError() << endl;
         return false;
@@ -31,7 +33,7 @@ bool GameSDL::init() {
         return false;
     }
 
-    font = TTF_OpenFont("Arial.ttf", 24);
+    font = TTF_OpenFont("Arial.ttf", 26);
     if (!font) {
         cout << "Failed to load font! TTF Error: " << TTF_GetError() << endl;
         return false;
@@ -71,8 +73,8 @@ void GameSDL::render(Game& game) {
     string scoreText = "Score: " + to_string(game.getScore());
     string bestScoreText = "Best: " + to_string(game.getBestScore());
 
-    SDL_Surface* scoreSurface = TTF_RenderText_Solid(font, scoreText.c_str(), textColor);
-    SDL_Surface* bestScoreSurface = TTF_RenderText_Solid(font, bestScoreText.c_str(), textColor);
+    SDL_Surface* scoreSurface = TTF_RenderText_Blended(font, scoreText.c_str(), textColor);
+    SDL_Surface* bestScoreSurface = TTF_RenderText_Blended(font, bestScoreText.c_str(), textColor);
 
     SDL_Texture* scoreTexture = SDL_CreateTextureFromSurface(renderer, scoreSurface);
     SDL_Texture* bestScoreTexture = SDL_CreateTextureFromSurface(renderer, bestScoreSurface);
@@ -100,7 +102,7 @@ void GameSDL::render(Game& game) {
             if (value != 0) {
                 SDL_Color textColor = { 0, 0, 0, 255 };
                 string text = to_string(value);
-                SDL_Surface* textSurface = TTF_RenderText_Solid(font, text.c_str(), textColor);
+                SDL_Surface* textSurface = TTF_RenderText_Blended(font, text.c_str(), textColor);
                 SDL_Texture* textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
 
                 int textWidth = textSurface->w;
@@ -181,6 +183,7 @@ void GameSDL::cleanUp() {
     TTF_Quit();
     SDL_Quit();
 }
+
 SDL_Color GameSDL::getTileColor(int value) {
     switch (value) {
         case 2:    return {238, 228, 218, 255};
