@@ -22,7 +22,6 @@ private:
     void rotateBoard();
     bool moveLeft();
     bool canMove();
-
 public:
     Game();
     int getScore() const { return score; }

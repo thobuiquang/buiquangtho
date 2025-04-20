@@ -5,7 +5,6 @@ Game::Game() : score(0), bestScore(0) {
     for (int i = 0; i < SIZE; ++i)
         for (int j = 0; j < SIZE; ++j)
             board[i][j] = 0;
-
     addRandomTile();
     addRandomTile();
     moved = false;

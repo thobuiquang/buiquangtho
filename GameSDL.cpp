@@ -92,10 +92,11 @@ void GameSDL::render(Game& game) {
         for (int j = 0; j < GRID_SIZE; j++) {
             SDL_Rect tile = { j * TILE_SIZE, i * TILE_SIZE + SCORE_AREA_HEIGHT, TILE_SIZE, TILE_SIZE };
 
-            SDL_SetRenderDrawColor(renderer, 200, 200, 200, 255);
+            int value = game.getValue(i, j);
+            SDL_Color tileColor = getTileColor(value);
+            SDL_SetRenderDrawColor(renderer, tileColor.r, tileColor.g, tileColor.b, tileColor.a);
             SDL_RenderFillRect(renderer, &tile);
 
-            int value = game.getValue(i, j);
             if (value != 0) {
                 SDL_Color textColor = { 0, 0, 0, 255 };
                 string text = to_string(value);
@@ -179,4 +180,20 @@ void GameSDL::cleanUp() {
     }
     TTF_Quit();
     SDL_Quit();
+}
+SDL_Color GameSDL::getTileColor(int value) {
+    switch (value) {
+        case 2:    return {238, 228, 218, 255};
+        case 4:    return {237, 224, 200, 255};
+        case 8:    return {242, 177, 121, 255};
+        case 16:   return {245, 149, 99, 255};
+        case 32:   return {246, 124, 95, 255};
+        case 64:   return {246, 94, 59, 255};
+        case 128:  return {237, 207, 114, 255};
+        case 256:  return {237, 204, 97, 255};
+        case 512:  return {237, 200, 80, 255};
+        case 1024: return {237, 197, 63, 255};
+        case 2048: return {237, 194, 46, 255};
+        default:   return {205, 193, 180, 255};
+    }
 }

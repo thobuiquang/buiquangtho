@@ -20,7 +20,7 @@ private:
     SDL_Renderer* renderer;
     int screenWidth;
     int screenHeight;
-
+    SDL_Color getTileColor(int value);
     Mix_Chunk* moveSound;
 
 public:
