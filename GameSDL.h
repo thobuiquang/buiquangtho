@@ -1,3 +1,4 @@
+
 #ifndef GAME_SDL_H
 #define GAME_SDL_H
 
@@ -30,6 +31,8 @@ public:
     void render(Game& game);
     void handleEvents(Game& game, bool& running);
     void cleanUp();
+    void showScoreWindow(int score, int bestScore);
+
 };
 
 #endif

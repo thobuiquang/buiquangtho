@@ -1,29 +1,37 @@
 # depslib dependency file v1.0
-1744302703 source:d:\sdl2\2048game\main.cpp
+1745404343 source:d:\sdl2\2048game\main.cpp
 	"Game.h"
 	"GameSDL.h"
 
-1744305256 source:d:\sdl2\2048game\game.cpp
+1745404343 source:d:\sdl2\2048game\game.cpp
 	"Game.h"
 
-1745165431 d:\sdl2\2048game\game.h
+1745404343 d:\sdl2\2048game\game.h
 	<iostream>
 	<vector>
 	<cstdlib>
 	<ctime>
 	<iomanip>
 
-1745165431 d:\sdl2\2048game\gamesdl.h
+1745404781 d:\sdl2\2048game\gamesdl.h
 	<SDL.h>
 	<SDL_ttf.h>
 	<SDL_mixer.h>
 	<iostream>
 	"Game.h"
 
-1745165459 source:d:\sdl2\2048game\gamesdl.cpp
+1745406355 source:d:\sdl2\2048game\gamesdl.cpp
 	"GameSDL.h"
 	<SDL_ttf.h>
 	<SDL_mixer.h>
 
 1744106838 d:\sdl2\2048game\animation.h
+
+1745403858 source:d:\sdl2\2048game\messageboxsdl.cpp
+	"MessageBoxSDL.h"
+
+1745403866 d:\sdl2\2048game\messageboxsdl.h
+	<SDL.h>
+	<SDL_ttf.h>
+	<string>
 

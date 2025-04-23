@@ -1,3 +1,4 @@
+
 #include "GameSDL.h"
 #include <SDL_ttf.h>
 #include <SDL_mixer.h>
@@ -134,7 +135,7 @@ void GameSDL::handleEvents(Game& game, bool& running) {
     SDL_Event e;
     while (SDL_PollEvent(&e)) {
         if (e.type == SDL_QUIT) {
-            cout << "Exiting game...\n";
+            cout << "Exiting game...";
             cout << "Your Score: " << game.getScore() << endl;
             cout << "Best Score: " << game.getBestScore() << endl;
             running = false;
@@ -146,9 +147,7 @@ void GameSDL::handleEvents(Game& game, bool& running) {
                 case SDLK_LEFT: moved = game.move('a'); break;
                 case SDLK_RIGHT: moved = game.move('d'); break;
                 case SDLK_ESCAPE:
-                    cout << "Exiting game...\n";
-                    cout << "Your Score: " << game.getScore() << endl;
-                    cout << "Best Score: " << game.getBestScore() << endl;
+                    showScoreWindow(game.getScore(), game.getBestScore());
                     running = false;
                     break;
             }
@@ -156,6 +155,9 @@ void GameSDL::handleEvents(Game& game, bool& running) {
                 Mix_PlayChannel(-1, moveSound, 0);
                 game.spawnNewTile();
                 render(game);
+                if (game.isGameOver()) {
+                    showScoreWindow(game.getScore(), game.getBestScore());
+                }
             }
         }
     }
@@ -199,4 +201,52 @@ SDL_Color GameSDL::getTileColor(int value) {
         case 2048: return {237, 194, 46, 255};
         default:   return {205, 193, 180, 255};
     }
+}
+
+void GameSDL::showScoreWindow(int score, int bestScore) {
+    SDL_Window* scoreWindow = SDL_CreateWindow("Game Over",
+        SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+        screenWidth, screenHeight, SDL_WINDOW_SHOWN);
+
+    SDL_Renderer* scoreRenderer = SDL_CreateRenderer(scoreWindow, -1, SDL_RENDERER_ACCELERATED);
+
+    SDL_SetRenderDrawColor(scoreRenderer, 220, 220, 220, 255);
+    SDL_RenderClear(scoreRenderer);
+
+    SDL_Color textColor = {0, 0, 0, 255};
+
+    string scoreText = "Score: " + to_string(score);
+    string bestScoreText = "Best: " + to_string(bestScore);
+
+    SDL_Surface* scoreSurface = TTF_RenderText_Blended(font, scoreText.c_str(), textColor);
+    SDL_Surface* bestSurface = TTF_RenderText_Blended(font, bestScoreText.c_str(), textColor);
+
+    SDL_Texture* scoreTexture = SDL_CreateTextureFromSurface(scoreRenderer, scoreSurface);
+    SDL_Texture* bestTexture = SDL_CreateTextureFromSurface(scoreRenderer, bestSurface);
+
+    SDL_Rect scoreRect = {
+        (screenWidth - scoreSurface->w) / 2,
+        screenHeight / 3 - scoreSurface->h / 2,
+        scoreSurface->w, scoreSurface->h
+    };
+
+    SDL_Rect bestRect = {
+        (screenWidth - bestSurface->w) / 2,
+        screenHeight / 2 - bestSurface->h / 2,
+        bestSurface->w, bestSurface->h
+    };
+
+    SDL_RenderCopy(scoreRenderer, scoreTexture, nullptr, &scoreRect);
+    SDL_RenderCopy(scoreRenderer, bestTexture, nullptr, &bestRect);
+    SDL_RenderPresent(scoreRenderer);
+
+    SDL_FreeSurface(scoreSurface);
+    SDL_FreeSurface(bestSurface);
+    SDL_DestroyTexture(scoreTexture);
+    SDL_DestroyTexture(bestTexture);
+
+    SDL_Delay(3000);
+
+    SDL_DestroyRenderer(scoreRenderer);
+    SDL_DestroyWindow(scoreWindow);
 }
