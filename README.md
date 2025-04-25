@@ -34,8 +34,6 @@ Người chơi sử dụng các phím mũi tên để di chuyển các ô số. 
 
 ## 📚 Tham khảo & Tài nguyên
 
-- **Mã nguồn tham khảo**:
-  - Một số ý tưởng xử lý logic gộp ô từ: [https://github.com/nopjmp/2048-sdl](https://github.com/nopjmp/2048-sdl)
 - **Tài nguyên sử dụng**:
   - Font: `Arial.ttf` được download trên mạng
   - Âm thanh: `move.wav` từ [https://freesound.org/]
