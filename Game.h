@@ -11,7 +11,6 @@ using namespace std;
 
 class Game {
 private:
-    private:
     int score;
     int bestScore;
     static const int SIZE = 4;
