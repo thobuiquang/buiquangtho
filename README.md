@@ -24,7 +24,7 @@ Người chơi sử dụng các phím mũi tên để di chuyển các ô số. 
 
 ## 🎥 Video giới thiệu
 
-**👉 Link video demo & trình bày mã nguồn**: bổ sung sau.
+**👉 Link video demo & trình bày mã nguồn**: https://drive.google.com/file/d/1HNZAg7l5VvGEOFmdrre2pTAaNW4ceHNB/view?usp=sharing
 
 *Nội dung video gồm:*
 - Giới thiệu cấu trúc mã nguồn
