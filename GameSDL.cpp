@@ -8,8 +8,8 @@ GameSDL::GameSDL() {
     renderer = nullptr;
     font = nullptr;
     moveSound = nullptr;
-    screenWidth = GRID_SIZE * TILE_SIZE;
-    screenHeight = GRID_SIZE * TILE_SIZE + SCORE_AREA_HEIGHT;
+    screenWidth = GRID_SIZE * TILE_SIZE; // = 400
+    screenHeight = GRID_SIZE * TILE_SIZE + SCORE_AREA_HEIGHT; // = 450
 }
 
 GameSDL::~GameSDL() {
@@ -45,8 +45,7 @@ bool GameSDL::init() {
         cout << "Failed to load move sound! Mix Error: " << Mix_GetError() << endl;
         return false;
     }
-
-    window = SDL_CreateWindow("2048 Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, screenWidth, screenHeight, SDL_WINDOW_SHOWN);
+    window = SDL_CreateWindow("2048 Game ", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, screenWidth, screenHeight, SDL_WINDOW_SHOWN);
     if (!window) {
         cout << "Window could not be created! SDL Error: " << SDL_GetError() << endl;
         return false;
@@ -135,9 +134,6 @@ void GameSDL::handleEvents(Game& game, bool& running) {
     SDL_Event e;
     while (SDL_PollEvent(&e)) {
         if (e.type == SDL_QUIT) {
-            cout << "Exiting game...";
-            cout << "Your Score: " << game.getScore() << endl;
-            cout << "Best Score: " << game.getBestScore() << endl;
             running = false;
         } else if (e.type == SDL_KEYDOWN) {
             bool moved = false;
@@ -245,7 +241,7 @@ void GameSDL::showScoreWindow(int score, int bestScore) {
     SDL_DestroyTexture(scoreTexture);
     SDL_DestroyTexture(bestTexture);
 
-    SDL_Delay(3000);
+    SDL_Delay(5000);
 
     SDL_DestroyRenderer(scoreRenderer);
     SDL_DestroyWindow(scoreWindow);

@@ -25,7 +25,7 @@ void Game::addRandomTile() {
                 emptyCells.push_back({i, j});
 
     if (!emptyCells.empty()) {
-        int randIndex = rand() % emptyCells.size();
+        int randIndex = rand() % emptyCells.size(); //Chọn một ô trống ngẫu nhiên
         int value = (rand() % 10 < 9) ? 2 : 4;
         board[emptyCells[randIndex].first][emptyCells[randIndex].second] = value;
     }
@@ -37,7 +37,7 @@ void Game::rotateBoard() {
         for (int j = 0; j < SIZE; ++j)
             temp[j][SIZE - 1 - i] = board[i][j];
 
-    for (int i = 0; i < SIZE; ++i)
+    for (int i = 0; i < SIZE; ++i) //Gán ngược temp về board
         for (int j = 0; j < SIZE; ++j)
             board[i][j] = temp[i][j];
 }
@@ -99,25 +99,21 @@ void Game::spawnNewTile() {
 }
 
 bool Game::isGameOver() {
-    if (!canMove()) {
-        cout << "Game Over! No more possible moves.\n";
-        cout << "Best Score: " << bestScore << endl;
-        return true;
-    }
-    return false;
+    return !canMove();
 }
+
 bool Game::canMove() {
     for (int i = 0; i < SIZE; ++i)
         for (int j = 0; j < SIZE; ++j)
-            if (board[i][j] == 0) return true;
+            if (board[i][j] == 0) return true; //Nếu còn ít nhất một ô trống, thì vẫn có thể đi → trả về true
 
     for (int i = 0; i < SIZE; ++i)
         for (int j = 0; j < SIZE - 1; ++j)
-            if (board[i][j] == board[i][j + 1]) return true;
+            if (board[i][j] == board[i][j + 1]) return true; //Kiểm tra các cặp ô liền kề theo hàng ngang
 
     for (int i = 0; i < SIZE - 1; ++i)
         for (int j = 0; j < SIZE; ++j)
-            if (board[i][j] == board[i + 1][j]) return true;
+            if (board[i][j] == board[i + 1][j]) return true; //Kiểm tra các cặp ô liền kề theo cột dọc
 
     return false;
 }

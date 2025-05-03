@@ -23,17 +23,16 @@ int main(int argc, char* argv[]) {
             cout << "Press SPACE to restart \n";
             bool waitForInput = true;
             while (waitForInput) {
-            SDL_Event e;
-            SDL_WaitEvent(&e);
-            if (e.type == SDL_QUIT || (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_q)) {
-            running = false;
-            waitForInput = false;
-            } else if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_SPACE) {
-            game.resetGame();
-            waitForInput = false;
+                SDL_Event e;
+                SDL_WaitEvent(&e);
+                if (e.type == SDL_QUIT || (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_ESCAPE)) {
+                    running = false;
+                    waitForInput = false;
+                } else if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_SPACE) {
+                    game.resetGame();
+                    waitForInput = false;
                 }
             }
-
         }
 
         SDL_Delay(100);
