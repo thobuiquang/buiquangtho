@@ -34,7 +34,7 @@ Game này yêu cầu người chơi sử dụng các phím mũi tên (`↑ ↓ �
 
 ## 🎥 Video giới thiệu
 
-**👉 Link video demo & trình bày mã nguồn**: [Xem video demo trên Google Drive](https://drive.google.com/file/d/1TefVRcYwe4KTjRlopHN0l2_P-gKi5G4D/view?usp=sharing)
+**👉 Link video & trình bày mã nguồn**: [Xem video trên Google Drive](https://drive.google.com/file/d/1TefVRcYwe4KTjRlopHN0l2_P-gKi5G4D/view?usp=sharing)
 
 *Nội dung video gồm:*
 - Giới thiệu cấu trúc mã nguồn.
