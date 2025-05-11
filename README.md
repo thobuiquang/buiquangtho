@@ -38,10 +38,6 @@ Người chơi sử dụng các phím mũi tên để di chuyển các ô số. 
   - Font: `Arial.ttf` được download trên mạng
   - Âm thanh: `move.wav` từ [https://freesound.org/]
 
-## 👨‍💻 Tác giả
 
-**Họ tên**: Bùi Quang Thọ  
-**Lớp**: [QH-2024-I/CQ-I-CS7] 
-**Mã SV**: [24021635]
 
 
