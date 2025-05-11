@@ -57,7 +57,7 @@ Game này yêu cầu người chơi sử dụng các phím mũi tên (`↑ ↓ �
 ## 🔧 Cách cài đặt và chạy
 
 1. **Cài đặt các thư viện cần thiết**:
-   - Cài đặt SDL2: [SDL2 Installation Guide](https://wiki.libsdl.org/Installation)
+   - Cài đặt SDL2: [SDL2 Installation Guide](https://github.com/libsdl-org/SDL/releases/tag/release-2.28.5)
    - Cài đặt SDL_ttf và SDL_mixer.
 2. **Clone repository**:
    ```bash
