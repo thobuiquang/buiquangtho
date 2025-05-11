@@ -61,5 +61,5 @@ Game này yêu cầu người chơi sử dụng các phím mũi tên (`↑ ↓ �
    - Cài đặt SDL_ttf và SDL_mixer.
 2. **Clone repository**:
    ```bash
-   git clone https://github.com/buiquangtho/2048-game.git
-   cd 2048-game
+   git clone https://github.com/thobuiquang/buiquangtho.git
+   cd buiquangtho
