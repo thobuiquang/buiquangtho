@@ -67,5 +67,5 @@ Dưới đây là một số ảnh của game:
    - Cài đặt SDL_ttf và SDL_mixer.
 2. **Clone repository**:
    ```bash
-   git clone https://github.com/your-repo/2048-game.git
+   git clone https://github.com/buiquangtho/2048-game.git
    cd 2048-game
