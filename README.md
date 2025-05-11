@@ -5,7 +5,7 @@
 Đây là phiên bản game **2048** được xây dựng bằng thư viện **SDL2**, kết hợp với **SDL_ttf** (hiển thị văn bản) và **SDL_mixer** (âm thanh).  
 Game này yêu cầu người chơi sử dụng các phím mũi tên (`↑ ↓ ← →`) để di chuyển các ô số trên bảng. Khi hai ô có cùng giá trị va chạm, chúng sẽ hợp nhất. Mục tiêu của game là tạo ra một ô có giá trị **2048**.
 
-![Game 2048 Screenshot](game_2048_screenshot.png) <!-- Thêm ảnh của game tại đây -->
+![Game 2048 Screenshot](photo.png) 
 
 ## 🔧 Chức năng chính
 
@@ -53,12 +53,6 @@ Game này yêu cầu người chơi sử dụng các phím mũi tên (`↑ ↓ �
 - **src/**: Chứa mã nguồn chính của game.
 - **assets/**: Chứa các tài nguyên như font, âm thanh, hình ảnh.
 - **README.md**: File này, chứa thông tin về dự án.
-
-## 📸 Ảnh Game
-
-Dưới đây là một số ảnh của game:
-
-![Game 2048 Screenshot](game_2048_screenshot.png) <!-- Thêm ảnh của game tại đây -->
 
 ## 🔧 Cách cài đặt và chạy
 
